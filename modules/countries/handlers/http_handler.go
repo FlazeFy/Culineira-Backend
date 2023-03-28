@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"culineira-backend/migrations"
 	"culineira-backend/modules/countries/repositories"
 	"net/http"
 
@@ -9,41 +8,23 @@ import (
 )
 
 func GetAllCountries(c *gin.Context) {
-	var (
-		result gin.H
-	)
-
-	models, err := repositories.GetAllCountries(migrations.DbConnection)
+	models, err := repositories.GetAllCountries()
 
 	if err != nil {
-		result = gin.H{
-			"result": err,
-		}
-	} else {
-		result = gin.H{
-			"result": models,
-		}
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
 	}
 
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, models)
 }
 
 func GetAllCountriesRecipe(c *gin.Context) {
-	var (
-		result gin.H
-	)
+	code := c.Param("countrycode")
 
-	models, err := repositories.GetAllCountriesRecipe(migrations.DbConnection)
+	models, err := repositories.GetAllCountriesRecipe(code)
 
 	if err != nil {
-		result = gin.H{
-			"result": err,
-		}
-	} else {
-		result = gin.H{
-			"result": models,
-		}
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
 	}
 
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, models)
 }

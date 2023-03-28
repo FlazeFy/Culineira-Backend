@@ -25,7 +25,6 @@ CREATE TABLE Users (
 
 	is_active BOOLEAN NOT NULL,  
 	created_at TIMESTAMP NOT NULL,
-	created_by VARCHAR NOT NULL,
 	updated_at TIMESTAMP, 
 	updated_by VARCHAR
 );
