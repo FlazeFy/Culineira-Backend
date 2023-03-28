@@ -16,6 +16,7 @@ CREATE TABLE Users (
     id VARCHAR PRIMARY KEY,
     country_code VARCHAR NOT NULL,
 	slug_name VARCHAR NOT NULL,
+	username VARCHAR NOT NULL,
 	first_name VARCHAR NOT NULL,
     last_name VARCHAR NOT NULL,
     job VARCHAR NOT NULL,

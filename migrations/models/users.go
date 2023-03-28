@@ -4,6 +4,7 @@ type Users struct {
 	Id          string `json:"id"`
 	CountryCode string `json:"country_code"`
 	SlugName    string `json:"slug_name"`
+	UserName    string `json:"username"`
 	FirstName   string `json:"first_name"`
 	LastName    string `json:"last_name"`
 	Job         string `json:"job"`
