@@ -3,6 +3,7 @@ package models
 type Recipes struct {
 	Id              string `json:"id"`
 	CountryCode     string `json:"country_code"`
+	RecipeSlug      string `json:"recipe_slug"`
 	RecipeName      string `json:"recipe_name"`
 	RecipeDesc      string `json:"recipe_desc"`
 	RecipeType      string `json:"recipe_type"`

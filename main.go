@@ -2,6 +2,7 @@ package main
 
 import (
 	"culineira-backend/migrations"
+	content_handler "culineira-backend/modules/contents/handlers"
 	country_handler "culineira-backend/modules/countries/handlers"
 	recipe_handler "culineira-backend/modules/recipes/handlers"
 	"database/sql"
@@ -51,6 +52,8 @@ func main() {
 
 	router.GET("/api/v1/recipe/", recipe_handler.GetAllRecipe)
 	router.GET("/api/v1/recipe/:slug", recipe_handler.GetAllRecipeBySlug)
+
+	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
 
 	router.Run("localhost:8080")
 }

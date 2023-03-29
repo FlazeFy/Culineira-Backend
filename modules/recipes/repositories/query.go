@@ -72,6 +72,7 @@ func GetAllRecipeBySlug(slug string) (response.Response, error) {
 	var res response.Response
 	var obj models.Recipes
 	var arrobj []models.Recipes
+
 	var RecipeImageURL sql.NullString
 	var RecipeVideoURL sql.NullString
 	var UpdatedAt sql.NullString
