@@ -54,6 +54,7 @@ CREATE TABLE Recipes (
 CREATE TABLE Steps (
     id VARCHAR PRIMARY KEY,
     recipes_id VARCHAR NOT NULL,
+	sort_number INT NOT NULL,
 	steps_body VARCHAR NOT NULL,
 	steps_image_url VARCHAR,
     steps_video_url VARCHAR,

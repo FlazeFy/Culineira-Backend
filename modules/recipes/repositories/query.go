@@ -68,7 +68,7 @@ func GetAllRecipe() (response.Response, error) {
 	return res, nil
 }
 
-func GetAllRecipeBySlug(slug string) (response.Response, error) {
+func GetRecipeBySlug(slug string) (response.Response, error) {
 	var res response.Response
 	var obj models.Recipes
 	var arrobj []models.Recipes

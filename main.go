@@ -52,7 +52,8 @@ func main() {
 	router.GET("/api/v1/country/recipe/:countrycode", country_handler.GetAllCountriesRecipe)
 
 	router.GET("/api/v1/recipe/", recipe_handler.GetAllRecipe)
-	router.GET("/api/v1/recipe/:slug", recipe_handler.GetAllRecipeBySlug)
+	router.GET("/api/v1/recipe/:slug", recipe_handler.GetRecipeBySlug)
+	router.GET("/api/v1/recipe/detail/:slug", recipe_handler.GetRecipeDetailBySlug)
 
 	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
 
