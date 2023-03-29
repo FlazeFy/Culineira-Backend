@@ -2,7 +2,8 @@ package main
 
 import (
 	"culineira-backend/migrations"
-	"culineira-backend/modules/countries/handlers"
+	country_handler "culineira-backend/modules/countries/handlers"
+	recipe_handler "culineira-backend/modules/recipes/handlers"
 	"database/sql"
 	"fmt"
 
@@ -45,8 +46,11 @@ func main() {
 
 	router := gin.Default()
 
-	router.GET("/api/v1/country/", handlers.GetAllCountries)
-	router.GET("/api/v1/country/recipe/:countrycode", handlers.GetAllCountriesRecipe)
+	router.GET("/api/v1/country/", country_handler.GetAllCountries)
+	router.GET("/api/v1/country/recipe/:countrycode", country_handler.GetAllCountriesRecipe)
+
+	router.GET("/api/v1/recipe/", recipe_handler.GetAllRecipe)
+	router.GET("/api/v1/recipe/:slug", recipe_handler.GetAllRecipeBySlug)
 
 	router.Run("localhost:8080")
 }

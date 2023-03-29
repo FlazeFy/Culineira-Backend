@@ -1,4 +1,4 @@
-package helpers
+package response
 
 type Response struct {
 	Status  int         `json:"status"`

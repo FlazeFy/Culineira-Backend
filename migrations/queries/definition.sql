@@ -32,12 +32,13 @@ CREATE TABLE Users (
 CREATE TABLE Recipes (
     id VARCHAR PRIMARY KEY,
 	country_code VARCHAR NOT NULL,
+	recipe_slug VARCHAR NOT NULL,
 	recipe_name VARCHAR NOT NULL,
 	recipe_desc VARCHAR,
 	recipe_type VARCHAR NOT NULL,
 	recipe_time_spend INT NOT NULL,
 	recipe_cal INT,
-	recipe_Level VARCHAR NOT NULL,
+	recipe_level VARCHAR NOT NULL,
 	recipe_image_url VARCHAR,
 	recipe_video_url VARCHAR, 
 

@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"culineira-backend/helpers"
+	"culineira-backend/helpers/response"
 	"culineira-backend/migrations"
 	"culineira-backend/modules/countries/models"
 	"fmt"
@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-func GetAllCountries() (helpers.Response, error) {
-	var res helpers.Response
+func GetAllCountries() (response.Response, error) {
+	var res response.Response
 	var obj models.Countries
 	var arrobj []models.Countries
 
@@ -43,8 +43,8 @@ func GetAllCountries() (helpers.Response, error) {
 	return res, nil
 }
 
-func GetAllCountriesRecipe(code string) (helpers.Response, error) {
-	var res helpers.Response
+func GetAllCountriesRecipe(code string) (response.Response, error) {
+	var res response.Response
 	var obj models.CountriesRecipe
 	var arrobj []models.CountriesRecipe
 
