@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Query
 func GetAllRecipe(c *gin.Context) {
 	models, err := repositories.GetAllRecipe()
 
@@ -54,4 +55,29 @@ func GetRecipeDetailBySlug(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
+}
+
+// Command
+func DeleteStepById(c *gin.Context) {
+	id := c.Param("id")
+
+	res, err := repositories.DeleteStepById(id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func DeleteIngredientById(c *gin.Context) {
+	id := c.Param("id")
+
+	res, err := repositories.DeleteIngredientById(id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
 }
