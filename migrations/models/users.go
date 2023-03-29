@@ -14,7 +14,6 @@ type Users struct {
 	//Properties
 	IsActive  bool   `json:"is_active"`
 	CreatedAt int64  `json:"created_at"`
-	CreatedBy string `json:"created_by"` //user id
 	UpdatedAt int64  `json:"updated_at"`
 	UpdatedBy string `json:"updated_by"` //user id
 }

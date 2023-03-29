@@ -5,6 +5,7 @@ import (
 	content_handler "culineira-backend/modules/contents/handlers"
 	country_handler "culineira-backend/modules/countries/handlers"
 	recipe_handler "culineira-backend/modules/recipes/handlers"
+	user_handler "culineira-backend/modules/users/handlers"
 	"database/sql"
 	"fmt"
 
@@ -54,6 +55,9 @@ func main() {
 	router.GET("/api/v1/recipe/:slug", recipe_handler.GetAllRecipeBySlug)
 
 	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
+
+	router.GET("/api/v1/user/", user_handler.GetAllUser)
+	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)
 
 	router.Run("localhost:8080")
 }
