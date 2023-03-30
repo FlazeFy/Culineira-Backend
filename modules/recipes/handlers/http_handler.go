@@ -116,3 +116,15 @@ func DeleteIngredientById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, res)
 }
+
+func DestroyRecipeById(c *gin.Context) {
+	id := c.Param("id")
+
+	res, err := repositories.DestroyRecipeById(id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
