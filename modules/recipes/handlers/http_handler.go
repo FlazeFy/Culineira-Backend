@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"culineira-backend/modules/recipes/models"
 	"culineira-backend/modules/recipes/repositories"
 	"net/http"
 	"strconv"
@@ -58,6 +59,40 @@ func GetRecipeDetailBySlug(c *gin.Context) {
 }
 
 // Command
+func CreateStep(c *gin.Context) {
+	var step models.CreateStep
+
+	err := c.ShouldBindJSON(&step)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.CreateStep(step)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func CreateIngredient(c *gin.Context) {
+	var ing models.CreateIngredient
+
+	err := c.ShouldBindJSON(&ing)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.CreateIngredient(ing)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
 func DeleteStepById(c *gin.Context) {
 	id := c.Param("id")
 
