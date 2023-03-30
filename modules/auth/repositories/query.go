@@ -69,3 +69,24 @@ func GetUserByUsernamePassword(username, password string) (response.LoginRespons
 
 	return res, nil
 }
+
+func GetUserByUsername(username string) bool {
+	sql := fmt.Sprintf("SELECT id "+
+		"FROM users WHERE username = '%s' LIMIT 1", username)
+
+	rows, err := migrations.DbConnection.Query(sql)
+
+	if err != nil {
+		return false
+	}
+	defer rows.Close()
+
+	if !rows.Next() {
+		if err := rows.Err(); err != nil {
+			return true
+		}
+		return true
+	}
+
+	return false
+}

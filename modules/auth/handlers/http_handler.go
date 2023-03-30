@@ -26,3 +26,30 @@ func Login(c *gin.Context) {
 
 	c.JSON(http.StatusOK, res)
 }
+
+func Register(c *gin.Context) {
+
+	var regis models.CreateUser
+
+	if err := c.ShouldBindJSON(&regis); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	status := repositories.GetUserByUsername(regis.UserName)
+
+	if !status {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Username already exist"})
+		return
+
+	} else {
+		res, err := repositories.CreateUser(regis)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, res)
+	}
+}

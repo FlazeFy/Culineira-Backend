@@ -96,6 +96,7 @@ func main() {
 	router.PUT("/api/v1/user/:id", user_handler.UpdateUserById)
 
 	router.POST("/api/v1/login", auth_handler.Login)
+	router.POST("/api/v1/register", auth_handler.Register)
 
 	router.Run("localhost:8080")
 }
