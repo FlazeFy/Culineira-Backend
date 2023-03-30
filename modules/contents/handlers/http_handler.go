@@ -68,3 +68,27 @@ func CreateComment(c *gin.Context) {
 
 	c.JSON(http.StatusOK, res)
 }
+
+func DestroyCommentById(c *gin.Context) {
+	id := c.Param("id")
+
+	res, err := repositories.DestroyCommentById(id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func DestroyLikeById(c *gin.Context) {
+	id := c.Param("id")
+
+	res, err := repositories.DestroyLikeById(id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}

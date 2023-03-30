@@ -63,8 +63,12 @@ func main() {
 	router.POST("/api/v1/ingredient", recipe_handler.CreateIngredient)
 
 	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
+
 	router.POST("/api/v1/like", content_handler.CreateLike)
+	router.DELETE("/api/v1/like/:id", content_handler.DestroyLikeById)
+
 	router.POST("/api/v1/comment", content_handler.CreateComment)
+	router.DELETE("/api/v1/comment/:id", content_handler.DestroyCommentById)
 
 	router.GET("/api/v1/user/", user_handler.GetAllUser)
 	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)

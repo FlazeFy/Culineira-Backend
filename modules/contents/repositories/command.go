@@ -75,3 +75,49 @@ func CreateComment(step models.CreateComments) (response.Response, error) {
 
 	return res, nil
 }
+
+func DestroyCommentById(id string) (response.Response, error) {
+	var res response.Response
+
+	sql := fmt.Sprintf("DELETE FROM comments WHERE id = '%s'", id)
+
+	result, err := migrations.DbConnection.Exec(sql)
+
+	if err != nil {
+		return res, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return res, err
+	}
+
+	res.Status = http.StatusOK
+	res.Message = fmt.Sprintf("Successfully removed %d data", rowsAffected)
+	res.Data = nil
+
+	return res, nil
+}
+
+func DestroyLikeById(id string) (response.Response, error) {
+	var res response.Response
+
+	sql := fmt.Sprintf("DELETE FROM likes WHERE id = '%s'", id)
+
+	result, err := migrations.DbConnection.Exec(sql)
+
+	if err != nil {
+		return res, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return res, err
+	}
+
+	res.Status = http.StatusOK
+	res.Message = fmt.Sprintf("Successfully removed %d data", rowsAffected)
+	res.Data = nil
+
+	return res, nil
+}
