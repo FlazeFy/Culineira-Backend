@@ -62,6 +62,8 @@ func main() {
 	router.POST("/api/v1/ingredient", recipe_handler.CreateIngredient)
 
 	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
+	router.POST("/api/v1/like", content_handler.CreateLike)
+	router.POST("/api/v1/comment", content_handler.CreateComment)
 
 	router.GET("/api/v1/user/", user_handler.GetAllUser)
 	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)

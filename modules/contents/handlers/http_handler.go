@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"culineira-backend/modules/contents/models"
 	"culineira-backend/modules/contents/repositories"
 	"net/http"
 	"strconv"
@@ -32,4 +33,38 @@ func GetRecipeContent(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
+}
+
+func CreateLike(c *gin.Context) {
+	var like models.CreateLikes
+
+	err := c.ShouldBindJSON(&like)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.CreateLike(like)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func CreateComment(c *gin.Context) {
+	var cmnt models.CreateComments
+
+	err := c.ShouldBindJSON(&cmnt)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.CreateComment(cmnt)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
 }
