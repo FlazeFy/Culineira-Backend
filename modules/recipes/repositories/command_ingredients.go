@@ -63,7 +63,7 @@ func CreateIngredient(step models.CreateIngredient) (response.Response, error) {
 	}
 
 	res.Status = http.StatusOK
-	res.Message = fmt.Sprintf("Successfully insert %d data", rowsAffected)
+	res.Message = fmt.Sprintf("Successfully inserted %d data", rowsAffected)
 	res.Data = fmt.Sprintf("Your data ID : %s", id)
 
 	return res, nil

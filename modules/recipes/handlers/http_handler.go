@@ -93,6 +93,23 @@ func CreateIngredient(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
+func CreateRecipe(c *gin.Context) {
+	var rcp models.CreateRecipe
+
+	err := c.ShouldBindJSON(&rcp)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.CreateRecipe(rcp)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
 func UpdateStepById(c *gin.Context) {
 	var step models.UpdateStep
 	id := c.Param("id")
@@ -121,6 +138,24 @@ func UpdateIngredientById(c *gin.Context) {
 	}
 
 	res, err := repositories.UpdateIngredient(ing, id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func UpdateRecipeById(c *gin.Context) {
+	var rcp models.UpdateRecipe
+	id := c.Param("id")
+
+	err := c.ShouldBindJSON(&rcp)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.UpdateRecipeById(rcp, id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})

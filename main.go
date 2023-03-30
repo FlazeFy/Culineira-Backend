@@ -54,7 +54,9 @@ func main() {
 	router.GET("/api/v1/recipe/", recipe_handler.GetAllRecipe)
 	router.GET("/api/v1/recipe/:slug", recipe_handler.GetRecipeBySlug)
 	router.GET("/api/v1/recipe/detail/:slug", recipe_handler.GetRecipeDetailBySlug)
+	router.POST("/api/v1/recipe", recipe_handler.CreateRecipe)
 	router.DELETE("/api/v1/recipe/:id", recipe_handler.DestroyRecipeById)
+	router.PUT("/api/v1/recipe/:id", recipe_handler.UpdateRecipeById)
 
 	router.DELETE("/api/v1/step/:id", recipe_handler.DeleteStepById)
 	router.POST("/api/v1/step", recipe_handler.CreateStep)
