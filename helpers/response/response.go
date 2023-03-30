@@ -10,4 +10,8 @@ type (
 		Response
 		Total int `json:"total"`
 	}
+	LoginResponse struct {
+		Response
+		Token string `json:"token"`
+	}
 )

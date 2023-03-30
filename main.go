@@ -2,14 +2,17 @@ package main
 
 import (
 	"culineira-backend/migrations"
+	auth_handler "culineira-backend/modules/auth/handlers"
 	content_handler "culineira-backend/modules/contents/handlers"
 	country_handler "culineira-backend/modules/countries/handlers"
 	recipe_handler "culineira-backend/modules/recipes/handlers"
 	user_handler "culineira-backend/modules/users/handlers"
 	"database/sql"
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -28,8 +31,21 @@ const (
 
 func main() {
 
-	psqInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+	err = godotenv.Load("config/.env")
+	if err != nil {
+		fmt.Println("Failed to load env")
+		panic(err)
+	} else {
+		fmt.Println("Success to load env")
+	}
+
+	psqInfo := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=disable",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+	)
 
 	DB, err := sql.Open("postgres", psqInfo)
 
@@ -78,6 +94,8 @@ func main() {
 	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)
 	router.DELETE("/api/v1/user/:id", user_handler.DeleteUserById)
 	router.PUT("/api/v1/user/:id", user_handler.UpdateUserById)
+
+	router.POST("/api/v1/login", auth_handler.Login)
 
 	router.Run("localhost:8080")
 }
