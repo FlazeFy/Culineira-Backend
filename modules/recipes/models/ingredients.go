@@ -20,4 +20,12 @@ type (
 		IsOptional bool   `json:"is_optional"`
 		CreatedBy  string `json:"created_by"`
 	}
+	UpdateIngredient struct {
+		IngredientName   string `json:"ingredient_name"`
+		IngredientVolume string `json:"ingredient_volume"`
+
+		//Properties
+		IsOptional bool   `json:"is_optional"`
+		UpdatedBy  string `json:"updated_by"`
+	}
 )

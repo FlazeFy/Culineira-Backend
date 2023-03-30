@@ -58,9 +58,11 @@ func main() {
 
 	router.DELETE("/api/v1/step/:id", recipe_handler.DeleteStepById)
 	router.POST("/api/v1/step", recipe_handler.CreateStep)
+	router.PUT("/api/v1/step/:id", recipe_handler.UpdateStepById)
 
 	router.DELETE("/api/v1/ingredient/:id", recipe_handler.DeleteIngredientById)
 	router.POST("/api/v1/ingredient", recipe_handler.CreateIngredient)
+	router.PUT("/api/v1/ingredient/:id", recipe_handler.UpdateIngredientById)
 
 	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
 

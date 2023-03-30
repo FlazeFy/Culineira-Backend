@@ -93,6 +93,42 @@ func CreateIngredient(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
+func UpdateStepById(c *gin.Context) {
+	var step models.UpdateStep
+	id := c.Param("id")
+
+	err := c.ShouldBindJSON(&step)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.UpdateStep(step, id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
+func UpdateIngredientById(c *gin.Context) {
+	var ing models.UpdateIngredient
+	id := c.Param("id")
+
+	err := c.ShouldBindJSON(&ing)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := repositories.UpdateIngredient(ing, id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+	}
+
+	c.JSON(http.StatusOK, res)
+}
+
 func DeleteStepById(c *gin.Context) {
 	id := c.Param("id")
 
