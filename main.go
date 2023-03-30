@@ -77,6 +77,7 @@ func main() {
 	router.GET("/api/v1/user/", user_handler.GetAllUser)
 	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)
 	router.DELETE("/api/v1/user/:id", user_handler.DeleteUserById)
+	router.PUT("/api/v1/user/:id", user_handler.UpdateUserById)
 
 	router.Run("localhost:8080")
 }

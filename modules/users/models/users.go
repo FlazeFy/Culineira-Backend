@@ -22,4 +22,13 @@ type (
 		CreatedAt string `json:"created_at"`
 		UpdatedAt string `json:"updated_at"`
 	}
+	UpdateUser struct {
+		CountryCode string `json:"country_code"`
+		FirstName   string `json:"first_name"`
+		LastName    string `json:"last_name"`
+		Job         string `json:"job"`
+
+		//Properties
+		UpdatedBy string `json:"updated_by"`
+	}
 )
