@@ -97,5 +97,5 @@ func main() {
 	protected.DELETE("/v1/user/:id", user_handler.DeleteUserById)
 	protected.PUT("/v1/user/:id", user_handler.UpdateUserById)
 
-	router.Run("localhost:8080")
+	router.Run(":" + os.Getenv("DB_PORT"))
 }
