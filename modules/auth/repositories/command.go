@@ -30,9 +30,9 @@ func CreateUser(step models.CreateUser) (response.LoginResponse, error) {
 	isActive := strconv.FormatBool(step.IsActive)
 
 	sql := fmt.Sprintf("INSERT INTO users "+
-		"(id, country_code, slug_name, username, first_name, last_name, job, email, password, is_active, created_at, created_by, updated_at, updated_by) "+
-		"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, '%s', '%s', NULL, NULL) ",
-		id, countryCode, slug, username, firstName, lastName, job, email, password, isActive, createdAt, id,
+		"(id, country_code, slug_name, username, first_name, last_name, job, email, password, is_active, created_at, updated_at, updated_by) "+
+		"VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %s, '%s', NULL, NULL) ",
+		id, countryCode, slug, username, firstName, lastName, job, email, password, isActive, createdAt,
 	)
 
 	result, err := migrations.DbConnection.Exec(sql)
