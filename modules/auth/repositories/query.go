@@ -1,8 +1,8 @@
 package repositories
 
 import (
+	"culineira-backend/helpers/auth"
 	"culineira-backend/helpers/converter"
-	"culineira-backend/helpers/generator"
 	"culineira-backend/helpers/response"
 	"culineira-backend/migrations"
 	"culineira-backend/modules/users/models"
@@ -54,7 +54,7 @@ func GetUserByUsernamePassword(username, password string) (response.LoginRespons
 	}
 
 	if id != "" {
-		token, err = generator.GetToken(id)
+		token, err = auth.GetToken(id)
 		msg = "Successfully get data"
 
 		if err != nil {

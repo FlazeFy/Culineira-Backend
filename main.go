@@ -1,6 +1,7 @@
 package main
 
 import (
+	"culineira-backend/middlewares"
 	"culineira-backend/migrations"
 	auth_handler "culineira-backend/modules/auth/handlers"
 	content_handler "culineira-backend/modules/contents/handlers"
@@ -64,39 +65,45 @@ func main() {
 
 	router := gin.Default()
 
-	router.GET("/api/v1/country/", country_handler.GetAllCountries)
-	router.GET("/api/v1/country/recipe/:countrycode", country_handler.GetAllCountriesRecipe)
+	// Public API
+	public := router.Group("/api")
+	public.POST("/v1/login", auth_handler.Login)
+	public.POST("/v1/register", auth_handler.Register)
 
-	router.GET("/api/v1/recipe/", recipe_handler.GetAllRecipe)
-	router.GET("/api/v1/recipe/:slug", recipe_handler.GetRecipeBySlug)
-	router.GET("/api/v1/recipe/detail/:slug", recipe_handler.GetRecipeDetailBySlug)
-	router.POST("/api/v1/recipe", recipe_handler.CreateRecipe)
-	router.DELETE("/api/v1/recipe/:id", recipe_handler.DestroyRecipeById)
-	router.PUT("/api/v1/recipe/:id", recipe_handler.UpdateRecipeById)
+	public.GET("/v1/country/", country_handler.GetAllCountries)
+	public.GET("/v1/country/recipe/:countrycode", country_handler.GetAllCountriesRecipe)
+	public.GET("/v1/recipe/:slug", recipe_handler.GetRecipeBySlug)
 
-	router.DELETE("/api/v1/step/:id", recipe_handler.DeleteStepById)
-	router.POST("/api/v1/step", recipe_handler.CreateStep)
-	router.PUT("/api/v1/step/:id", recipe_handler.UpdateStepById)
+	// Protected JWT API
+	protected := router.Group("/api")
+	protected.Use(middlewares.JwtAuthMiddleware())
 
-	router.DELETE("/api/v1/ingredient/:id", recipe_handler.DeleteIngredientById)
-	router.POST("/api/v1/ingredient", recipe_handler.CreateIngredient)
-	router.PUT("/api/v1/ingredient/:id", recipe_handler.UpdateIngredientById)
+	protected.GET("/v1/recipe/", recipe_handler.GetAllRecipe)
+	protected.GET("/v1/recipe/detail/:slug", recipe_handler.GetRecipeDetailBySlug)
+	protected.POST("/v1/recipe", recipe_handler.CreateRecipe)
+	protected.DELETE("/v1/recipe/:id", recipe_handler.DestroyRecipeById)
+	protected.PUT("/v1/recipe/:id", recipe_handler.UpdateRecipeById)
 
-	router.GET("/api/v1/content/:recipes_id", content_handler.GetRecipeContent)
+	protected.DELETE("/v1/step/:id", recipe_handler.DeleteStepById)
+	protected.POST("/v1/step", recipe_handler.CreateStep)
+	protected.PUT("/v1/step/:id", recipe_handler.UpdateStepById)
 
-	router.POST("/api/v1/like", content_handler.CreateLike)
-	router.DELETE("/api/v1/like/:id", content_handler.DestroyLikeById)
+	protected.DELETE("/v1/ingredient/:id", recipe_handler.DeleteIngredientById)
+	protected.POST("/v1/ingredient", recipe_handler.CreateIngredient)
+	protected.PUT("/v1/ingredient/:id", recipe_handler.UpdateIngredientById)
 
-	router.POST("/api/v1/comment", content_handler.CreateComment)
-	router.DELETE("/api/v1/comment/:id", content_handler.DestroyCommentById)
+	protected.GET("/v1/content/:recipes_id", content_handler.GetRecipeContent)
 
-	router.GET("/api/v1/user/", user_handler.GetAllUser)
-	router.GET("/api/v1/user/:slug", user_handler.GetUserBySlug)
-	router.DELETE("/api/v1/user/:id", user_handler.DeleteUserById)
-	router.PUT("/api/v1/user/:id", user_handler.UpdateUserById)
+	protected.POST("/v1/like", content_handler.CreateLike)
+	protected.DELETE("/v1/like/:id", content_handler.DestroyLikeById)
 
-	router.POST("/api/v1/login", auth_handler.Login)
-	router.POST("/api/v1/register", auth_handler.Register)
+	protected.POST("/v1/comment", content_handler.CreateComment)
+	protected.DELETE("/v1/comment/:id", content_handler.DestroyCommentById)
+
+	protected.GET("/v1/user/", user_handler.GetAllUser)
+	protected.GET("/v1/user/:slug", user_handler.GetUserBySlug)
+	protected.DELETE("/v1/user/:id", user_handler.DeleteUserById)
+	protected.PUT("/v1/user/:id", user_handler.UpdateUserById)
 
 	router.Run("localhost:8080")
 }

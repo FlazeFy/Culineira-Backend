@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"culineira-backend/helpers/auth"
 	"culineira-backend/helpers/generator"
 	"culineira-backend/helpers/response"
 	"culineira-backend/migrations"
@@ -46,7 +47,7 @@ func CreateUser(step models.CreateUser) (response.LoginResponse, error) {
 	}
 
 	if id != "" {
-		token, err = generator.GetToken(id)
+		token, err = auth.GetToken(id)
 
 		if err != nil {
 			return res, err

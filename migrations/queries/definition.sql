@@ -99,4 +99,42 @@ CREATE TABLE Comments (
 	deleted_by VARCHAR
 );
 
+ALTER TABLE countries
+ADD CONSTRAINT app_code_unique UNIQUE (country_code)
+
+ALTER TABLE likes  
+ADD CONSTRAINT fk_id_likes_recipes
+FOREIGN KEY (recipes_id)
+REFERENCES recipes (id);
+
+ALTER TABLE comments  
+ADD CONSTRAINT fk_id_comments_recipes
+FOREIGN KEY (recipes_id)
+REFERENCES recipes (id);
+
+ALTER TABLE steps  
+ADD CONSTRAINT fk_id_steps_recipes
+FOREIGN KEY (recipes_id)
+REFERENCES recipes (id);
+
+ALTER TABLE ingredients  
+ADD CONSTRAINT fk_id_ingredients_recipes
+FOREIGN KEY (recipes_id)
+REFERENCES recipes (id);
+
+ALTER TABLE recipes  
+ADD CONSTRAINT fk_id_recipes_countries
+FOREIGN KEY (country_code)
+REFERENCES countries (country_code);
+
+ALTER TABLE users  
+ADD CONSTRAINT fk_id_users_countries
+FOREIGN KEY (country_code)
+REFERENCES countries (country_code);
+
+ALTER TABLE recipes  
+ADD CONSTRAINT fk_id_recipes_users
+FOREIGN KEY (created_by)
+REFERENCES users (id);
+
 -- +migrate StatementEnd
