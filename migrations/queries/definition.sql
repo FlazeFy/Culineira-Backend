@@ -100,7 +100,7 @@ CREATE TABLE Comments (
 );
 
 ALTER TABLE countries
-ADD CONSTRAINT app_code_unique UNIQUE (country_code)
+ADD CONSTRAINT app_code_unique UNIQUE (country_code);
 
 ALTER TABLE likes  
 ADD CONSTRAINT fk_id_likes_recipes

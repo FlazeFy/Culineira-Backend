@@ -22,14 +22,6 @@ var (
 	err error
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "nopass123"
-	dbname   = "culineira"
-)
-
 func main() {
 
 	err = godotenv.Load("config/.env")
